@@ -2,7 +2,6 @@ package edu.iu.wjduncan.primesservice.controller;
 
 import edu.iu.wjduncan.primesservice.model.Customer;
 import edu.iu.wjduncan.primesservice.service.IAuthenticationService;
-import edu.iu.wjduncan.primesservice.service.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

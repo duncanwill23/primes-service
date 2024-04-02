@@ -1,6 +1,7 @@
 package edu.iu.wjduncan.primesservice.service;
 
 import edu.iu.wjduncan.primesservice.model.Customer;
+import edu.iu.wjduncan.primesservice.repository.AuthenticationDBRepository;
 import edu.iu.wjduncan.primesservice.repository.IAuthenticationRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,13 +19,13 @@ import java.io.IOException;
 @Service
 public class AuthenticationService implements IAuthenticationService, UserDetailsService {
 
-    IAuthenticationRepository authenticationRepository;
+    AuthenticationDBRepository authenticationRepository;
 
-    public AuthenticationService(IAuthenticationRepository authenticationRepository){
+    public AuthenticationService(AuthenticationDBRepository authenticationRepository){
         this.authenticationRepository = authenticationRepository;
     }
     @Override
-    public boolean register(Customer customer) throws IOException {
+    public Customer register(Customer customer) throws IOException {
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         String passwordEncoded = bc.encode(customer.getPassword());
         customer.setPassword(passwordEncoded);
@@ -48,7 +49,7 @@ public class AuthenticationService implements IAuthenticationService, UserDetail
                     .password(customer.getPassword())
                     .build();
 
-        }catch (IOException e){
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
     }
