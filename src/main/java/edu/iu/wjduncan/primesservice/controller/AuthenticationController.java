@@ -5,6 +5,8 @@ import edu.iu.wjduncan.primesservice.service.IAuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.token.TokenService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +25,7 @@ public class AuthenticationController {
         this.tokenService = tokenService;
     }
     @PostMapping("/register")
-    public boolean register(@RequestBody Customer customer){
+    public Customer register(@RequestBody Customer customer){
         try{
             return authenticationService.register(customer);
         }catch (IOException e){
